@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MapleStory XSeren Wisp Timer</title>
+</head>
+<body>
+
+<p>enter seconds on dawn entry (xx:xx):</p>
+<input id="time">
+<button id="button" onclick="startTimer()">start</button>
+<p id="timer"></p>
+
+</body>
+</html>
+
+<script>
+
+// Trigger button on enter
+var input = document.getElementById("time");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("button").click();
+  }
+});
+
+cycle = 1;
+
+function startTimer(){
+console.log("yoooo");
+neg=1;
+
+document.getElementById("timer").innerHTML += "Cycle #" + cycle + "<br>";
+document.getElementById("timer").innerHTML += "----------------" + "<br>";
+
+for (var i = 1; i <= 9; i++){
+var time = document.getElementById("time").value - 15*i
+
+if (time > 0){
+document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:") + time + "<br>";
+} else {
+if (time+60*neg < 0){
+neg++;
+}
+
+document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:") + (time + 60*neg) + "<br>";
+}
+}
+document.getElementById("timer").innerHTML += "----------------" + "<br><br>";
+cycle++;
+document.getElementById("time").value = "";
+}
+</script>
