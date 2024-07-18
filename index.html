@@ -1,53 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>MapleStory XSeren Wisp Timer</title>
+<title>MapleStory Seren Wisp Timer</title>
+<style>
+  button {
+  	border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  input {
+  	border-radius: 5px;
+    text-align: center;
+  }
+  
+  p {
+  	font-family: Roboto;
+  }
+</style>
 </head>
-<body>
+  <body>
+	<center> 
+      <p>Enter seconds on dawn entry (xx:xx):</p>
 
-<p>enter seconds on dawn entry (xx:xx):</p>
-<input id="time">
-<button id="button" onclick="startTimer()">start</button>
-<p id="timer"></p>
-
-</body>
+      <input id="time" style="width:35px">
+      <button id="button" onclick="startTimer()">start</button>
+      <p id="timer"></p>
+	</center>
+  </body>
 </html>
 
 <script>
 
-// Trigger button on enter
-var input = document.getElementById("time");
-input.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("button").click();
+  // Trigger button on enter
+  var input = document.getElementById("time");
+  
+  input.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("button").click();
+    }
+  });
+
+  cycle = 1;
+
+  function startTimer(){
+    console.log("yoooo");
+    neg=1;
+
+    document.getElementById("timer").innerHTML += "Cycle #" + cycle + "<br>";
+    document.getElementById("timer").innerHTML += "----------------" + "<br>";
+
+    for (var i = 1; i <= 9; i++){
+      var time = document.getElementById("time").value - 15*i
+	  console.log("time: " + time);
+      if (time > 0){
+      	if (time < 10){
+          document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:0") + time + "<br>";
+        } else {
+          document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:") + time + "<br>";
+        }
+      } else {
+        if (time+60*neg < 0){
+          neg++;
+        }
+
+        if (time+60*neg < 10){
+          document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:0") + (time + 60*neg) + "<br>";
+        } else {
+          document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:") + (time + 60*neg) + "<br>";
+        }
+      }
+    }
+    
+    document.getElementById("timer").innerHTML += "----------------" + "<br><br>";
+    document.getElementById("time").value = "";
+    cycle++;
   }
-});
-
-cycle = 1;
-
-function startTimer(){
-console.log("yoooo");
-neg=1;
-
-document.getElementById("timer").innerHTML += "Cycle #" + cycle + "<br>";
-document.getElementById("timer").innerHTML += "----------------" + "<br>";
-
-for (var i = 1; i <= 9; i++){
-var time = document.getElementById("time").value - 15*i
-
-if (time > 0){
-document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:") + time + "<br>";
-} else {
-if (time+60*neg < 0){
-neg++;
-}
-
-document.getElementById("timer").innerHTML += ("Wisp #" + (i) + ": xx:") + (time + 60*neg) + "<br>";
-}
-}
-document.getElementById("timer").innerHTML += "----------------" + "<br><br>";
-cycle++;
-document.getElementById("time").value = "";
-}
 </script>
